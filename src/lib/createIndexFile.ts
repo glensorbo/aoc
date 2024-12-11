@@ -11,6 +11,7 @@ export const createIndexFile = async (
 
   const content = `import { logInput } from "../../lib/logInput";
 import { logSolution } from "../../lib/logSolution";
+import { calculateRuntime } from "../../lib/calculateRuntime";
 
 let task1 = 0;
 let task2 = 0;
@@ -23,19 +24,22 @@ const input = (await file.text()).trimEnd().split(${/\r?\n/});
 
 logInput(input);
 
+const task1Runtime = calculateRuntime(task1StartTime);
+
 /*
  *
  * PART TWO
  *
  */
-
 const task2StartTime = performance.now();
+
+
 
 logSolution({
   year: ${year},
   day: "${day}",
   task1,
-  task1StartTime,
+  task1Runtime,
   task2,
   task2StartTime,
 });

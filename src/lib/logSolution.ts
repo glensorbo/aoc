@@ -6,14 +6,14 @@ export const logSolution = ({
   day,
   task1,
   task2,
-  task1StartTime,
+  task1Runtime,
   task2StartTime,
 }: {
   year: number;
   day: string;
   task1: string | number;
   task2: string | number;
-  task1StartTime: number;
+  task1Runtime: string;
   task2StartTime: number;
 }) => {
   if (typeof task1 === "number") {
@@ -56,7 +56,7 @@ export const logSolution = ({
   console.log(
     styleText(
       "green",
-      `* Task 1 was solved in ${styleText("magenta", calculateRuntime(task1StartTime))}`,
+      `* Task 1 was solved in ${styleText("magenta", task1Runtime)}`,
     ),
   );
   console.log(

@@ -1,3 +1,4 @@
+import { calculateRuntime } from "../../lib/calculateRuntime";
 import { logSolution } from "../../lib/logSolution";
 
 const task1StartTime = performance.now();
@@ -44,6 +45,8 @@ for (let i = 0; i < bitsAndBobs.length; i++) {
   }
   task1 += +bitsAndBobs[i] * i;
 }
+
+const task1Runtime = calculateRuntime(task1StartTime);
 
 /*
  *
@@ -95,7 +98,7 @@ logSolution({
   year: 2024,
   day: "09",
   task1,
-  task1StartTime,
+  task1Runtime,
   task2,
   task2StartTime,
 });
