@@ -33,7 +33,7 @@ const task2StartTime = performance.now();
 
 logSolution({
   year: ${year},
-  day: ${day},
+  day: "${day}",
   task1,
   task1StartTime,
   task2,

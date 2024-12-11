@@ -52,7 +52,6 @@ for (let y = 0; y < input.length; y++) {
 }
 
 task1 = [...new Set(paths)].length;
-task2 = paths.length;
 
 /*
  *
@@ -61,6 +60,8 @@ task2 = paths.length;
  */
 
 const task2StartTime = performance.now();
+
+task2 = paths.length;
 
 logSolution({
   year: 2024,
