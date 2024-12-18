@@ -17,8 +17,13 @@ const solveYear = async (year: number, days: string[]) => {
 
 if (solve) {
   if (day !== new Date().getDate().toString()) {
-    console.log("solve for another day");
-    await Bun.$`bun src/${year}/day_${day}/index.ts`;
+    const basePath = `src/${year}/day_${day}`;
+    const file = Bun.file(`${basePath}/index.ts`);
+    if (!(await file.exists())) {
+      await fetchInput(`${basePath}/input.txt`, year, day);
+      await createIndexFile(basePath, year, day.toString());
+    }
+    await Bun.$`bun ${basePath}/index.ts`;
   } else {
     const startTime = performance.now();
     const days = await readdir(`./src/${year}`);
