@@ -23,14 +23,12 @@ type Queue = {
   dir: number[];
 };
 
-const findPath = ({
-  startY,
-  startX,
-  endY,
-  endX,
-}: {
-  [key: string]: number;
-}) => {
+const findPath = (
+  startY: number,
+  startX: number,
+  endY: number,
+  endX: number,
+) => {
   const queue: Queue[] = [
     {
       pos: { y: startY, x: startX },
@@ -78,6 +76,9 @@ const findPath = ({
 
     const vk = `${y},${x},${curr.dir ? dirs.indexOf(curr.dir) : -1}`;
 
+    if (visited[vk]) {
+      continue;
+    }
     visited[vk] = true;
 
     for (const dir of dirs) {
@@ -108,14 +109,9 @@ coords.slice(0, 1024).forEach((c) => {
   grid[c.y][c.x] = "#";
 });
 
-const best = findPath({
-  startY: 0,
-  startX: 0,
-  endY: 70,
-  endX: 70,
-});
+const best = findPath(0, 0, 70, 70);
 
-console.log(best?.path.length);
+task1 = best?.path.length ?? 0;
 
 const task1Runtime = calculateRuntime(task1StartTime);
 
