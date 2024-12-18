@@ -11,6 +11,8 @@ const file = Bun.file("src/2024/day_17/input.txt");
 
 const input = await file.text();
 
+const task2Start = parseInt(/Register A: (\d+)/.exec(input)![1]);
+
 const program = {
   registers: {
     a: parseInt(/Register A: (\d+)/.exec(input)![1]),
@@ -47,7 +49,7 @@ const adv = (operand: number) => {
 };
 
 const bxl = (operand: number) => {
-  program.registers.b = program.registers.b ^ operand;
+  program.registers.b = Number(BigInt(program.registers.b) ^ BigInt(operand));
   program.ip += 2;
 };
 
@@ -65,7 +67,9 @@ const jnz = (operand: number) => {
 };
 
 const bxc = () => {
-  program.registers.b = program.registers.b ^ program.registers.c;
+  program.registers.b = Number(
+    BigInt(program.registers.b) ^ BigInt(program.registers.c),
+  );
   program.ip += 2;
 };
 
@@ -131,18 +135,23 @@ const task1Runtime = calculateRuntime(task1StartTime);
  */
 const task2StartTime = performance.now();
 
-/* for (let i = 0; i < 10000000; i++) {
+task2 = 240000000000000;
+
+for (
+  let i = task2;
+  program.stdout.join(",") !== program.opcodes.join(",");
+  i++
+) {
   program.registers.a = i;
   program.ip = 0;
   program.stdout = [];
 
-  const res = exec();
+  exec();
 
-  if (res === program.opcodes.join(",")) {
-    task2 = i;
-    break;
-  }
-} */
+  console.log(i);
+
+  task2++;
+}
 
 logSolution({
   year: 2024,
